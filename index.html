@@ -6,58 +6,179 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piano Show</title>
     <style>
-      .video-container {
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #333;
+            border: 4px double #007bff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* 新增的边框区域样式 */
+       .bordered-section {
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        /* 艺术字样式 */
+       .artistic-text {
+            font-family: cursive; /* 手写字体示例，可根据喜好更换 */
+            font-size: 1.5em;
+            color: #007bff;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+       .artistic-text:hover {
+            color: #0056b3;
+        }
+
+        /* 视频容器样式 */
+       .video-container {
             position: relative;
             padding-top: 56.25%;
             margin: 20px;
             width: 45%;
             display: inline-block;
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background-clip: padding-box;
         }
 
-      .video-container iframe {
+        /* 渐变色边框 */
+       .video-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #007bff, #00ff88);
+            border-radius: 18px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* 视频容器悬停效果 */
+       .video-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        }
+
+       .video-container:hover::before {
+            opacity: 1;
+        }
+
+        /* 视频图片样式 */
+       .video-thumbnail {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
         }
 
-      .play-button {
+        /* 视频iframe样式 */
+       .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            border-radius: 14px;
+        }
+
+        /* 播放按钮样式 */
+       .play-button {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
             color: white;
             font-size: 2em;
             padding: 20px;
             border-radius: 50%;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* 播放按钮悬停效果 */
+       .play-button:hover {
+            background-color: rgba(0, 123, 255, 0.8);
+            transform: translate(-50%, -50%) scale(1.1);
         }
     </style>
 </head>
 
 <body>
     <h1>恋琴tv</h1>
+    <div class="bordered-section">
+        <span class="artistic-text" onclick="playVideoByIndex(0)">1-《我的秘密》</span><br>
+        <span class="artistic-text" onclick="playVideoByIndex(1)">2-《晴天》</span>
+    </div>
+    <!-- 第一个视频 -->
     <div class="video-container">
-        <div class="play-button" onclick="playVideo(this, 'video1')">▶</div>
+        <div class="video-thumbnail" style="background-image: url('https://via.placeholder.com/800x450');" onclick="playVideo(this, 'video1')">
+            <div class="play-button">▶</div>
+        </div>
         <iframe id="video1" src="https://player.bilibili.com/player.html?bvid=BV1unN8ezEx3&page=1&autoplay=0"
-            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="display:none;">
+            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
         </iframe>
     </div>
+    <!-- 第二个视频 -->
     <div class="video-container">
-        <div class="play-button" onclick="playVideo(this, 'video2')">▶</div>
+        <div class="video-thumbnail" style="background-image: url('https://via.placeholder.com/800x450');" onclick="playVideo(this, 'video2')">
+            <div class="play-button">▶</div>
+        </div>
         <iframe id="video2" src="https://player.bilibili.com/player.html?bvid=BV14ANSeXEwK&page=1&autoplay=0"
-            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="display:none;">
+            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
         </iframe>
     </div>
+
     <script>
-        function playVideo(button, iframeId) {
+        function playVideo(thumbnail, iframeId) {
+            thumbnail.style.opacity = '0';
+            setTimeout(() => {
+                thumbnail.style.display = 'none';
+            }, 300);
             var iframe = document.getElementById(iframeId);
             iframe.style.display = 'block';
             var url = new URL(iframe.src);
             url.searchParams.set('autoplay', '1');
             iframe.src = url.toString();
+        }
+
+        function playVideoByIndex(index) {
+            var videoContainers = document.querySelectorAll('.video-container');
+            var thumbnails = document.querySelectorAll('.video-thumbnail');
+            var iframes = document.querySelectorAll('iframe');
+            for (var i = 0; i < videoContainers.length; i++) {
+                thumbnails[i].style.opacity = '1';
+                thumbnails[i].style.display = 'block';
+                iframes[i].style.display = 'none';
+            }
+            playVideo(thumbnails[index], iframes[index].id);
         }
     </script>
 </body>

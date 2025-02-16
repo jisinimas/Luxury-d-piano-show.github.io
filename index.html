@@ -20,7 +20,7 @@
         }
 
         /* 新增的边框区域样式 */
-      .bordered-section {
+       .bordered-section {
             border: 2px solid #007bff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -31,7 +31,7 @@
         }
 
         /* 艺术字样式 */
-      .artistic-text {
+       .artistic-text {
             font-family: cursive; /* 手写字体示例，可根据喜好更换 */
             font-size: 1.5em;
             color: #007bff;
@@ -39,12 +39,12 @@
             transition: color 0.3s ease;
         }
 
-      .artistic-text:hover {
+       .artistic-text:hover {
             color: #0056b3;
         }
 
         /* 视频容器样式 */
-      .video-container {
+       .video-container {
             position: relative;
             padding-top: 56.25%;
             width: 80%; /* 调整宽度，使其占据更宽的比例，可根据需要调整 */
@@ -60,7 +60,7 @@
         }
 
         /* 渐变色边框 */
-      .video-container::before {
+       .video-container::before {
             content: '';
             position: absolute;
             top: -2px;
@@ -75,17 +75,17 @@
         }
 
         /* 视频容器悬停效果 */
-      .video-container:hover {
+       .video-container:hover {
             transform: scale(1.02);
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
         }
 
-      .video-container:hover::before {
+       .video-container:hover::before {
             opacity: 1;
         }
 
         /* 视频图片样式 */
-      .video-thumbnail {
+       .video-thumbnail {
             position: absolute;
             top: 0;
             left: 0;
@@ -98,7 +98,7 @@
         }
 
         /* 视频iframe样式 */
-      .video-container iframe {
+       .video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -109,7 +109,7 @@
         }
 
         /* 播放按钮样式 */
-      .play-button {
+       .play-button {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -124,13 +124,13 @@
         }
 
         /* 播放按钮悬停效果 */
-      .play-button:hover {
+       .play-button:hover {
             background-color: rgba(0, 123, 255, 0.8);
             transform: translate(-50%, -50%) scale(1.1);
         }
 
         /* 提示文字样式 */
-      .server-status-note {
+       .server-status-note {
             text-align: center;
             color: #999;
             font-size: 0.8em;
@@ -175,12 +175,12 @@
             <div class="play-button">▶</div>
         </div>
         <iframe id="video3"
-            src="https://player.bilibili.com/player.html?bvid=BV15XAKekEyT&page=1&autoplay=0" scrolling="no"
+            src="https://player.bilibili.com/player.html?bvid=BV1YbA5ecEZW&page=1&autoplay=0" scrolling="no"
             border="0" frameborder="no" framespacing="0" allowfullscreen="true">
         </iframe>
     </div>
     <div class="server-status-note">
-        当主电脑作为服务器关机时，网址将会出现404报错无法正常运行，电脑开机后即可恢复
+        当主电脑作为服务器关机时，网址将会出现404无法正常运行，电脑开机后即可恢复
     </div>
     <script>
         function playVideo(thumbnail, iframeId) {
